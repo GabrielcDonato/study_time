@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "754405868706",
+    "project_id": "study-time-donato",
+    "storage_bucket": "study-time-donato.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754405868706:android:90864ee043e777fa6983fb",
+        "android_client_info": {
+          "package_name": "com.gabrieldonato.study_time"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754405868706-cd0q0mlrf877m62rr9j8q6t0vija3k8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCptTnoq78k_v1oUWb5uPY_RvUdtGA-lAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754405868706-cd0q0mlrf877m62rr9j8q6t0vija3k8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
