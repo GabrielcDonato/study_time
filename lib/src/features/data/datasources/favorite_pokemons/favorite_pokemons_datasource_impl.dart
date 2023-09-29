@@ -37,12 +37,11 @@ class FavoritePokemonsDatasourceImpl implements FavoritePokemonsDatasource {
   }
 
   @override
-  Future<bool> remove(
-      {required FavoritePokemonsModel favoritePokemonsModel}) async {
+  Future<bool> remove({required String idPokemon}) async {
     try {
       final favorites = _firebaseFirestore.collection("pokemon_favoritos");
 
-      final docRef = favorites.doc(favoritePokemonsModel.idPokemon);
+      final docRef = favorites.doc(idPokemon);
 
       await docRef.delete();
 

@@ -12,9 +12,8 @@ class RemoveFavoritePokemonUsecaseImpl implements RemoveFavoritePokemonUsecase {
       : _favoritePokemonsRepository = favoritePokemonsRepository;
 
   @override
-  Future<Either<FavoritePokemonsFailure, bool>> call(
-          {required FavoritePokemonEntity favoritePokemonEntity}) =>
+  Future<Either<Failure, bool>> call({required String idPokemon}) =>
       _favoritePokemonsRepository.remove(
-        favoritePokemonEntity: favoritePokemonEntity,
+        idPokemon: idPokemon,
       );
 }

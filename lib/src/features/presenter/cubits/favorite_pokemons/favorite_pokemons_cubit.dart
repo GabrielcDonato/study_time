@@ -21,18 +21,18 @@ class FavoritePokemonsCubit extends Cubit<FavoritePokemonsState> {
         );
 
   void removeFromFavorite({
-    required FavoritePokemonEntity favoritePokemonEntity,
+    required String idPokemon,
   }) async {
     emit(const FavoritePokemonsLoading());
 
     final result = await _removeFavoritePokemonUsecase(
-      favoritePokemonEntity: favoritePokemonEntity,
+      idPokemon: idPokemon,
     );
 
     result.fold(
-      (l) => emit(const FavoritePokemonsInitial()),
+      (l) => emit(const RemoveFavoritePokemonsError()),
       (r) => emit(
-        const FavoritePokemonsSuccess(),
+        const RemoveFavoritePokemonsSuccess(),
       ),
     );
   }

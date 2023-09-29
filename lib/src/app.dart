@@ -4,7 +4,9 @@ import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/core/routes/route_generator.dart';
 import 'package:study_time/src/features/domain/usecases/export_usecases.dart';
 import 'package:study_time/app_config.dart';
+import 'package:study_time/src/features/domain/usecases/get_saved_favorite_pokemons/get_saved_favorite_pokemons_usecase.dart';
 import 'package:study_time/src/features/presenter/cubits/export_cubits.dart';
+import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
 
 import 'core/get_it/get_it_instance.dart';
 
@@ -34,6 +36,12 @@ Future<Widget> initializeApp() async {
           addFavoritePokemonUsecase: getIt.get<AddFavoritePokemonUsecase>(),
           removeFavoritePokemonUsecase:
               getIt.get<RemoveFavoritePokemonUsecase>(),
+        ),
+      ),
+      BlocProvider<GetSavedFavoritePokemonsCubit>(
+        create: (_) => GetSavedFavoritePokemonsCubit(
+          getSavedFavoritePokemonsUsecase:
+              getIt.get<GetSavedFavoritePokemonsUsecase>(),
         ),
       ),
     ],

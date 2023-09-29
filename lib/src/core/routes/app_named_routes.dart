@@ -8,4 +8,5 @@ sealed class AppNamedRoutes {
 
   static const String pokemonsPage = '/initial-page-pokemon';
   static const String detailsPokemonPage = '/details-page';
+  static const String favoritePokemonsPage = '/favorite-pokemons-page';
 }

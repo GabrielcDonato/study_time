@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:study_time/src/features/data/models/favorite_pokemons/favorite_pokemons_model.dart';
-import 'package:study_time/src/features/data/models/get_saved_favorite_pokemons/get_saved_favorite_pokemons_model.dart';
 import 'package:study_time/src/features/domain/entities/favorite_pokemons/favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
 import 'package:study_time/src/features/presenter/cubits/favorite_pokemons/favorite_pokemons_cubit.dart';
@@ -71,28 +68,14 @@ class _PokemonItemWidgetState extends State<PokemonItemWidget> {
                     children: [
                       IconButton(
                         onPressed: () async {
-                          final result = await FirebaseFirestore.instance
-                              .collection("pokemon_favoritos");
-
-                          final querySnapShot = await result.get();
-                          final favoritePokemons =
-                              querySnapShot.docs.map((doc) {
-                            final data = doc.data() as Map<String, dynamic>;
-                            return GetSavedFavoritePokemonsModel.fromMap(
-                                data['pokemon']);
-                          }).toList();
-
-                          print(favoritePokemons);
-                          print(favoritePokemons.length);
+                          _favoritePokemonsCubit.addToFavorite(
+                            favoritePokemonEntity: FavoritePokemonEntity(
+                              idPokemon: widget.pokemon.numPokemon,
+                              imagePokemon: widget.pokemon.image,
+                              namePokemon: widget.pokemon.name,
+                            ),
+                          );
                         },
-
-                        //  _favoritePokemonsCubit.addToFavorite(
-                        //   favoritePokemonEntity: FavoritePokemonEntity(
-                        //     idPokemon: widget.pokemon.numPokemon,
-                        //     imagePokemon: widget.pokemon.image,
-                        //     namePokemon: widget.pokemon.name,
-                        //   ),
-                        // ),
                         icon: const Icon(
                           Icons.heart_broken_outlined,
                         ),

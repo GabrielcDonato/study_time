@@ -18,7 +18,9 @@ final class GetSavedFavoritePokemonsDatasourceImpl
 
       final getFavorites = await favorites.get();
 
-      return GetSavedFavoritePokemonsModel.fromMap(getFavorites);
+      return GetSavedFavoritePokemonsModel.fromSnapshot(
+        getFavorites,
+      );
     } catch (e, s) {
       throw GetSavedFavoritePokemonsExceptions(
         message: 'Erro ao adicionar aos favoritos',

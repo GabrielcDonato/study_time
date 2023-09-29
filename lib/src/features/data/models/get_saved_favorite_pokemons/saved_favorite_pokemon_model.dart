@@ -9,9 +9,9 @@ class SavedFavoritePokemonModel extends SavedFavoritePokemonEntity {
 
   factory SavedFavoritePokemonModel.fromJson(Map<String, dynamic> json) {
     return SavedFavoritePokemonModel(
-      idPokemon: json['idPokemon'],
-      imagePokemon: json['imagePokemon'],
-      namePokemon: json['namePokemon'],
+      idPokemon: json['pokemon']['idPokemon'],
+      imagePokemon: json['pokemon']['imagePokemon'],
+      namePokemon: json['pokemon']['namePokemon'],
     );
   }
 }

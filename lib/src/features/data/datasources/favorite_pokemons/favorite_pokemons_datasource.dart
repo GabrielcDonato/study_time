@@ -3,5 +3,5 @@ import 'package:study_time/src/features/data/models/favorite_pokemons/favorite_p
 abstract class FavoritePokemonsDatasource {
   Future<bool> add({required FavoritePokemonsModel favoritePokemonsModel});
 
-  Future<bool> remove({required FavoritePokemonsModel favoritePokemonsModel});
+  Future<bool> remove({required String idPokemon});
 }

@@ -6,15 +6,14 @@ final class GetSavedFavoritePokemonsModel
     extends GetSavedFavoritePokemonsEntity {
   GetSavedFavoritePokemonsModel({required super.savedPokemons});
 
-  factory GetSavedFavoritePokemonsModel.fromMap(
-      QuerySnapshot<Map<String, dynamic>> snap) {
-    var snapshot = snap as Map<String, dynamic>;
-
-    final savedPokemons = (snapshot['pokemons'] as List? ?? [])
-        .cast<Map<String, dynamic>>()
-        .map(SavedFavoritePokemonModel.fromJson)
-        .toList();
-
+  factory GetSavedFavoritePokemonsModel.fromSnapshot(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
+    final savedPokemons = snapshot.docs.map(
+      (DocumentSnapshot document) {
+        Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+        return SavedFavoritePokemonModel.fromJson(data);
+      },
+    ).toList();
     return GetSavedFavoritePokemonsModel(
       savedPokemons: savedPokemons,
     );

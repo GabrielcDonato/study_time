@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:study_time/src/core/arguments/details_pokemon_argument/details_pokemon_argument.dart';
 import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
+import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokemons/saved_favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/presenter/widgets/pokemon_item_widget.dart';
 
 class ContentPokemonWidget extends StatefulWidget {

@@ -24,3 +24,11 @@ final class FavoritePokemonsLoading extends FavoritePokemonsState {
 final class FavoritePokemonsSuccess extends FavoritePokemonsState {
   const FavoritePokemonsSuccess();
 }
+
+final class RemoveFavoritePokemonsSuccess extends FavoritePokemonsState {
+  const RemoveFavoritePokemonsSuccess();
+}
+
+final class RemoveFavoritePokemonsError extends FavoritePokemonsState {
+  const RemoveFavoritePokemonsError();
+}

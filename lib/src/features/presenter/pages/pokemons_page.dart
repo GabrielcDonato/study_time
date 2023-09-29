@@ -1,10 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
-import 'package:study_time/src/features/presenter/cubits/favorite_pokemons/favorite_pokemons_cubit.dart';
+import 'package:study_time/src/core/routes/app_named_routes.dart';
+import 'package:study_time/src/core/widgets/primary_button_state.dart';
+import 'package:study_time/src/core/widgets/primary_button_widget.dart';
 
 import 'package:study_time/src/features/presenter/cubits/get_all_pokemons/get_all_pokemons_cubit.dart';
+import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
 import 'package:study_time/src/features/presenter/cubits/user/user_cubit.dart';
 import 'package:study_time/src/features/presenter/widgets/content_pokemon_widget.dart';
 
@@ -23,16 +25,15 @@ class _PokemonsPageState extends State<PokemonsPage> {
   late final GetAllPokemonsCubit _getAllPokemonsCubit;
   late final UserCubit _userCubit;
   late final TextEditingController _searchController;
-  late final FavoritePokemonsCubit _favoritePokemonsCubit;
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
     _getAllPokemonsCubit = context.read<GetAllPokemonsCubit>();
+
     _getAllPokemonsCubit.getAllPokemons();
     _userCubit = context.read<UserCubit>();
-    _favoritePokemonsCubit = context.read<FavoritePokemonsCubit>();
   }
 
   @override
@@ -55,7 +56,11 @@ class _PokemonsPageState extends State<PokemonsPage> {
           );
         }
         if (state is GetAllPokemonsError) {
-          return const Material(child: Text("Deu erro"));
+          return const Material(
+            child: Text(
+              "Deu erro",
+            ),
+          );
         }
 
         if (state is GetAllPokemonsSuccess) {
@@ -63,29 +68,33 @@ class _PokemonsPageState extends State<PokemonsPage> {
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(100.0),
               child: AppBar(
+                actions: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          AppNamedRoutes.favoritePokemonsPage,
+                        ),
+                        icon: const Icon(
+                          Icons.heart_broken,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => _userCubit.logout(),
+                        icon: const Icon(
+                          Icons.logout,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
                 toolbarHeight: 200,
                 backgroundColor: const Color(
                   0xffDC0A2D,
                 ),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: IconButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white)),
-                      color: Colors.white,
-                      onPressed: () {
-                        _userCubit.logout();
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                      ),
-                    ),
-                  ),
-                ],
                 title: SizedBox(
-                  height: 32,
+                  height: 50,
                   width: 280,
                   child: TextField(
                     controller: _searchController,
@@ -104,7 +113,6 @@ class _PokemonsPageState extends State<PokemonsPage> {
                       fillColor: Colors.white,
                       prefixIcon: const Icon(Icons.search),
                       prefixIconColor: Colors.red,
-                      // hintText: 'Search',
                       hintStyle: const TextStyle(
                         color: Color(
                           0xff666666,
