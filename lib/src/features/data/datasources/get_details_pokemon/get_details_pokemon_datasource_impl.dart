@@ -18,7 +18,7 @@ class GetDetailsPokemonDatasourceImpl implements GetDetailsPokemonDatasource {
           await _dio.post('https://pokeapi.co/api/v2/pokemon/$pokemonId');
 
       return DetailsPokemonModel.fromJson(response.data);
-    } on DioError catch (exception, stackTrace) {
+    } on DioException catch (exception, stackTrace) {
       throw PokedexExceptions(
           message: exception.toString(), stackTrace: stackTrace);
     } catch (exception, stackTrace) {

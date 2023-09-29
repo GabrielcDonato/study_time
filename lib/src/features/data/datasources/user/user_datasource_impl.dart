@@ -19,7 +19,6 @@ class UserDatasourceImpl implements UserDatasource {
 
       return userCredential.user;
     } on FirebaseAuthException catch (exception, stackTrace) {
-//email-already-exists
       if (exception.code == 'email-already-in-use') {
         final loginTypes =
             await _firebaseAuth.fetchSignInMethodsForEmail(user.email);

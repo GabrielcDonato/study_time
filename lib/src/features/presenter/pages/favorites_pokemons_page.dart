@@ -33,6 +33,7 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.red,
         title: const Text('Favoritos'),
       ),

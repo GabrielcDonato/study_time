@@ -69,65 +69,71 @@ class _PokemonsPageState extends State<PokemonsPage> {
             child: Scaffold(
               appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(100.0),
-                child: AppBar(
-                  actions: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Modular.to.pushNamed(
-                            AppNamedRoutes.favoritePokemonsPage,
-                            arguments: FavoritesPokemonsArgument(
-                              uId: widget.argument.uId,
+                child: WillPopScope(
+                  //Todo gostaria de sair do app?
+                  onWillPop: () async => false,
+                  child: AppBar(
+                    automaticallyImplyLeading: false,
+                    actions: [
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () => Modular.to.pushNamed(
+                              AppNamedRoutes.favoritePokemonsPage,
+                              arguments: FavoritesPokemonsArgument(
+                                uId: widget.argument.uId,
+                              ),
+                            ),
+                            icon: const Icon(
+                              Icons.heart_broken,
                             ),
                           ),
-                          icon: const Icon(
-                            Icons.heart_broken,
+                          IconButton(
+                            onPressed: () => _userCubit.logout(),
+                            icon: const Icon(
+                              Icons.logout,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () => _userCubit.logout(),
-                          icon: const Icon(
-                            Icons.logout,
+                        ],
+                      )
+                    ],
+                    toolbarHeight: 200,
+                    backgroundColor: const Color(
+                      0xffDC0A2D,
+                    ),
+                    title: SizedBox(
+                      height: 50,
+                      width: 280,
+                      child: TextField(
+                        controller: _searchController,
+                        style: const TextStyle(color: Colors.black),
+                        cursorColor: Colors.red,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                  toolbarHeight: 200,
-                  backgroundColor: const Color(
-                    0xffDC0A2D,
-                  ),
-                  title: SizedBox(
-                    height: 50,
-                    width: 280,
-                    child: TextField(
-                      controller: _searchController,
-                      style: const TextStyle(color: Colors.black),
-                      cursorColor: Colors.red,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.search),
-                        prefixIconColor: Colors.red,
-                        hintStyle: const TextStyle(
-                          color: Color(
-                            0xff666666,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          fontSize: 10,
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIcon: const Icon(Icons.search),
+                          prefixIconColor: Colors.red,
+                          hintStyle: const TextStyle(
+                            color: Color(
+                              0xff666666,
+                            ),
+                            fontSize: 10,
+                          ),
+                          border: InputBorder.none,
                         ),
-                        border: InputBorder.none,
+                        onChanged: (value) {
+                          _getAllPokemonsCubit.filterPokemon(
+                              namePokemon: value);
+                        },
                       ),
-                      onChanged: (value) {
-                        _getAllPokemonsCubit.filterPokemon(namePokemon: value);
-                      },
                     ),
                   ),
                 ),

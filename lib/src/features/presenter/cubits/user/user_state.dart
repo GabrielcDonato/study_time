@@ -33,6 +33,15 @@ final class UserSuccess extends UserState {
   List<Object> get props => [user];
 }
 
+final class LoginSuccess extends UserState {
+  final User user;
+
+  const LoginSuccess({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}
+
 final class LogoutLoading extends UserState {
   const LogoutLoading();
 }

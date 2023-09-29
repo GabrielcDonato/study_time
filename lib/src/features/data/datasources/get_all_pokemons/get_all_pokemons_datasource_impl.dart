@@ -22,7 +22,7 @@ class GetAllPokemonsDatasourceImpl implements GetAllPokemonsDatasource {
       final json = jsonDecode(response.data) as Map<String, dynamic>;
       final list = json['pokemon'] as List<dynamic>;
       return list.map((pokemon) => PokemonsModel.fromMap(pokemon)).toList();
-    } on DioError catch (exception, stackTrace) {
+    } on DioException catch (exception, stackTrace) {
       throw PokedexExceptions(
           message: exception.toString(), stackTrace: stackTrace);
     } catch (exception, stackTrace) {

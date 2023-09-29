@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/features/domain/entities/user/user_entity.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_in_user_usecase.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_out_user_usecase.dart';
@@ -53,7 +54,7 @@ class UserCubit extends Cubit<UserState> {
         UserError(message: failure.message ?? ''),
       ),
       (user) => emit(
-        UserSuccess(
+        LoginSuccess(
           user: user!,
         ),
       ),
@@ -76,4 +77,21 @@ class UserCubit extends Cubit<UserState> {
       ),
     );
   }
+
+//   Future<void> auth() async {
+//     emit(
+//       const UserLoading(),
+//     );
+
+//  final a =  Modular.get<FirebaseAuth>().authStateChanges();
+//  a.
+//     result.fold(
+//       (failure) => emit(
+//         UserError(message: failure.message ?? ''),
+//       ),
+//       (logoutDone) => emit(
+//         const LogoutSuccess(),
+//       ),
+//     );
+//   }
 }

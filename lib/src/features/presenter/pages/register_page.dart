@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
@@ -90,12 +91,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: GeneralButtonWidget(
                       isLoading: state is UserLoading,
                       state: ButtonState.secondary,
-                      onPressed: () => _userCubit.registerUser(
-                        user: UserEntity(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      ),
+                      onPressed: () {
+                        _userCubit.registerUser(
+                          user: UserEntity(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                      },
                       title: 'Cadastrar',
                     ),
                   );
