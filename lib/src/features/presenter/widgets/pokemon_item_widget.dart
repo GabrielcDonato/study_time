@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_time/src/core/colors/app_colors.dart';
+import 'package:study_time/src/core/widgets/custom_snack_bar_widget.dart';
 import 'package:study_time/src/features/domain/entities/favorite_pokemons/favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
 import 'package:study_time/src/features/presenter/cubits/favorite_pokemons/favorite_pokemons_cubit.dart';
@@ -47,20 +48,16 @@ class _PokemonItemWidgetState extends State<PokemonItemWidget> {
                 bloc: _favoritePokemonsCubit,
                 listener: (context, state) {
                   if (state is FavoritePokemonsSuccess) {
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content:
-                            Text('Pokemon adicionado a lista de favoritos'),
-                      ),
+                    CustomSnackBarWidget.show(
+                      context: context,
+                      backgroundColor: Colors.lightGreen,
+                      title: 'Pokemon adicionado a lista de favoritos',
                     );
                   }
                   if (state is FavoritePokemonsError) {
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                      ),
+                    CustomSnackBarWidget.show(
+                      context: context,
+                      title: state.message,
                     );
                   }
                 },

@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart'
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
 import 'package:study_time/src/core/colors/app_colors.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
+import 'package:study_time/src/core/widgets/custom_snack_bar_widget.dart';
 import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
 import 'package:study_time/src/core/widgets/primary_button_widget.dart';
@@ -65,14 +66,11 @@ class _LoginPageState extends State<LoginPage> {
               );
             }
             if (state is UserSuccess) {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.lightGreen,
-                  content: Text(
-                      "Usuario cadastrado com sucesso por favor confirme seu e-mail para logar"),
-                ),
+              CustomSnackBarWidget.show(
+                backgroundColor: Colors.lightGreen,
+                context: context,
+                title:
+                    "Usuario cadastrado com sucesso por favor confirme seu e-mail para logar",
               );
             }
           },
@@ -98,21 +96,9 @@ class _LoginPageState extends State<LoginPage> {
                   bloc: _userCubit,
                   listener: (context, state) {
                     if (state is UserError) {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
-                      );
-                    }
-                    if (state is UserError) {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
+                      CustomSnackBarWidget.show(
+                        context: context,
+                        title: state.message,
                       );
                     }
                   },

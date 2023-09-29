@@ -53,6 +53,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'App',
+      debugShowCheckedModeBanner: false,
       routerConfig: Modular.routerConfig,
     );
   }

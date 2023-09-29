@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/colors/app_colors.dart';
+import 'package:study_time/src/core/widgets/custom_snack_bar_widget.dart';
 import 'package:study_time/src/core/widgets/general_loading_widget.dart';
 import 'package:study_time/src/features/presenter/cubits/export_cubits.dart';
 import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
@@ -62,20 +63,16 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
                     FavoritePokemonsState>(
                   listener: (context, state) {
                     if (state is RemoveFavoritePokemonsSuccess) {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('Pokemon removido da lista de favoritos'),
-                        ),
+                      CustomSnackBarWidget.show(
+                        context: context,
+                        backgroundColor: AppColors.primaryColor,
+                        title: 'Pokemon removido da lista de favoritos',
                       );
                     }
                     if (state is FavoritePokemonsError) {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
+                      CustomSnackBarWidget.show(
+                        context: context,
+                        title: state.message,
                       );
                     }
                   },
