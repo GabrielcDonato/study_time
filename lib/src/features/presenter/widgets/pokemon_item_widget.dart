@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
 import 'package:study_time/src/features/domain/entities/favorite_pokemons/favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
 import 'package:study_time/src/features/presenter/cubits/favorite_pokemons/favorite_pokemons_cubit.dart';
@@ -15,7 +16,7 @@ class PokemonItemWidget extends StatefulWidget {
   }) : super(key: key);
   final String userId;
   final PokemonEntity pokemon;
-  final void Function() onTap;
+  final VoidCallback onTap;
   final int index;
   final String name;
 
@@ -37,8 +38,8 @@ class _PokemonItemWidgetState extends State<PokemonItemWidget> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Card(
-        elevation: 5,
-        color: const Color(0xFFffffff),
+        elevation: 10,
+        color: AppColors.secondaryColor,
         child: ListTile(
           title: Column(
             children: [
@@ -91,7 +92,7 @@ class _PokemonItemWidgetState extends State<PokemonItemWidget> {
                 children: [
                   Image.network(
                     widget.pokemon.image,
-                    height: 65,
+                    height: MediaQuery.sizeOf(context).height * 0.08,
                   ),
                   FittedBox(
                     child: Text(

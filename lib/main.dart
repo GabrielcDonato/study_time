@@ -31,10 +31,7 @@ class AppModule extends Module {
     Modular.setInitialRoute(
       AppNamedRoutes.loginPage,
     );
-    // r.child(
-    //   '/',
-    //   child: (context) => const LoginPage(),
-    // );
+
     r.child(
       AppNamedRoutes.loginPage,
       child: (context) => const LoginPage(),

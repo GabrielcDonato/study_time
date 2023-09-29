@@ -4,12 +4,15 @@ import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
 import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 
 import 'package:study_time/src/features/presenter/cubits/get_all_pokemons/get_all_pokemons_cubit.dart';
 import 'package:study_time/src/features/presenter/cubits/user/user_cubit.dart';
 import 'package:study_time/src/features/presenter/widgets/content_pokemon_widget.dart';
+
+import '../../../core/widgets/general_loading_widget.dart';
 
 class PokemonsPage extends StatefulWidget {
   final PokemonArgument argument;
@@ -46,14 +49,11 @@ class _PokemonsPageState extends State<PokemonsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllPokemonsCubit, GetAllPokemonsState>(
+      bloc: _getAllPokemonsCubit,
       builder: (context, state) {
         if (state is GetAllPokemonsLoading) {
           return const Material(
-            child: Center(
-              child: CircularProgressIndicator(
-                color: Colors.red,
-              ),
-            ),
+            child: GeneralLoadingWidget(),
           );
         }
         if (state is GetAllPokemonsError) {
@@ -68,7 +68,8 @@ class _PokemonsPageState extends State<PokemonsPage> {
           return HideKeyboardWidget(
             child: Scaffold(
               appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(100.0),
+                preferredSize:
+                    Size.fromHeight(MediaQuery.sizeOf(context).height * 0.15),
                 child: WillPopScope(
                   //Todo gostaria de sair do app?
                   onWillPop: () async => false,
@@ -97,36 +98,28 @@ class _PokemonsPageState extends State<PokemonsPage> {
                         ],
                       )
                     ],
-                    toolbarHeight: 200,
-                    backgroundColor: const Color(
-                      0xffDC0A2D,
-                    ),
+                    toolbarHeight: MediaQuery.sizeOf(context).height,
+                    backgroundColor: AppColors.primaryColor,
                     title: SizedBox(
-                      height: 50,
-                      width: 280,
                       child: TextField(
                         controller: _searchController,
                         style: const TextStyle(color: Colors.black),
-                        cursorColor: Colors.red,
+                        cursorColor: AppColors.primaryColor,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(
+                                color: AppColors.secondaryColor),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(
+                                color: AppColors.secondaryColor),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: AppColors.secondaryColor,
                           prefixIcon: const Icon(Icons.search),
-                          prefixIconColor: Colors.red,
-                          hintStyle: const TextStyle(
-                            color: Color(
-                              0xff666666,
-                            ),
-                            fontSize: 10,
-                          ),
+                          prefixIconColor: AppColors.primaryColor,
                           border: InputBorder.none,
                         ),
                         onChanged: (value) {
@@ -144,16 +137,13 @@ class _PokemonsPageState extends State<PokemonsPage> {
                     Container(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
-                      color: const Color(
-                        0xffDC0A2D,
-                      ),
+                      color: AppColors.primaryColor,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Colors.white,
-                          ),
+                              borderRadius: BorderRadius.circular(16),
+                              color: AppColors.secondaryColor),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ContentPokemonWidget(

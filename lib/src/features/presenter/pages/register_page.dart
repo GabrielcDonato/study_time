@@ -69,6 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 bloc: _userCubit,
                 listener: (context, state) {
                   if (state is UserError) {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(

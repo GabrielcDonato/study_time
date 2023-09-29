@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
+import 'package:study_time/src/core/widgets/general_loading_widget.dart';
 import 'package:study_time/src/features/presenter/cubits/export_cubits.dart';
 import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
 
@@ -34,7 +36,7 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.primaryColor,
         title: const Text('Favoritos'),
       ),
       body: BlocBuilder<GetSavedFavoritePokemonsCubit,
@@ -42,11 +44,14 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
         bloc: _getSavedFavoritePokemonsCubit,
         builder: (context, state) {
           if (state is GetSavedFavoritePokemonsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const GeneralLoadingWidget();
           }
           if (state is GetSavedFavoritePokemonsSuccessEmpty) {
             return const Center(
-                child: Text('Você não possui nenhum pokemon nos favoritos'));
+              child: Text(
+                'Você não possui nenhum pokemon nos favoritos',
+              ),
+            );
           }
           if (state is GetSavedFavoritePokemonsSuccess) {
             return ListView.builder(
@@ -113,12 +118,14 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
                                           .idPokemon,
                                       userId: widget.argument.uId,
                                     )
-                                    .then((value) => {
-                                          _getSavedFavoritePokemonsCubit
-                                              .getFavorites(
-                                            userId: widget.argument.uId,
-                                          ),
-                                        });
+                                    .then(
+                                      (_) => {
+                                        _getSavedFavoritePokemonsCubit
+                                            .getFavorites(
+                                          userId: widget.argument.uId,
+                                        ),
+                                      },
+                                    );
                               },
                               icon: const Icon(
                                 Icons.remove_circle_outline_rounded,

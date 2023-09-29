@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:study_time/src/core/arguments/details_pokemon/details_pokemon_argument.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
 
 class DetailsPokemonPage extends StatelessWidget {
   final DetailsPokemonArgument arguments;
@@ -16,7 +17,8 @@ class DetailsPokemonPage extends StatelessWidget {
         children: [
           Scaffold(
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(250.0),
+              preferredSize:
+                  Size.fromHeight(MediaQuery.sizeOf(context).height * 0.3),
               child: AppBar(
                 backgroundColor: arguments.color,
                 title: Row(
@@ -27,15 +29,15 @@ class DetailsPokemonPage extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w700,
                         fontSize: 24,
-                        color: Colors.white,
+                        color: AppColors.secondaryColor,
                       ),
                     ),
                     Text(
                       '#${arguments.numPokemon}',
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                        color: Colors.white,
+                        fontSize: 16,
+                        color: AppColors.secondaryColor,
                       ),
                     ),
                   ],
@@ -58,16 +60,18 @@ class DetailsPokemonPage extends StatelessWidget {
                             color: arguments.color,
                           ),
                         ),
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(arguments.weight),
                             const Text('Weight'),
+                            Text(arguments.weight),
                           ],
                         ),
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text('${arguments.height.substring(0, 3)} m'),
                             const Text('Height'),
+                            Text('${arguments.height.substring(0, 3)} m'),
                           ],
                         )
                       ],

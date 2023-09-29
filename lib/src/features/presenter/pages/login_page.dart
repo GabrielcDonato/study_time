@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
 import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.primaryColor,
           title: const Text('Login'),
         ),
         body: BlocListener<UserCubit, UserState>(
@@ -94,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 BlocConsumer<UserCubit, UserState>(
+                  bloc: _userCubit,
                   listener: (context, state) {
                     if (state is UserError) {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -114,7 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     }
                   },
-                  bloc: _userCubit,
                   builder: (context, state) {
                     return SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.8,

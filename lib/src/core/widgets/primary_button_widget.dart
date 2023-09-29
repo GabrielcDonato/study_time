@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_time/src/core/colors/app_colors.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
 
 class GeneralButtonWidget extends StatelessWidget {
@@ -23,15 +24,16 @@ class GeneralButtonWidget extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          foregroundColor:
-              state == ButtonState.primary ? Colors.white : Colors.red,
+          foregroundColor: state == ButtonState.primary
+              ? AppColors.secondaryColor
+              : AppColors.primaryColor,
           backgroundColor: state.getColor(),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(999),
             side: BorderSide(
               color: state == ButtonState.primary
                   ? Colors.transparent
-                  : Colors.red,
+                  : AppColors.primaryColor,
               width: 2,
             ),
           ),
@@ -43,7 +45,7 @@ class GeneralButtonWidget extends StatelessWidget {
                   height: 14,
                   width: 14,
                   child: CircularProgressIndicator.adaptive(
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColors.secondaryColor,
                   ),
                 ),
               )
