@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
 import 'package:study_time/src/core/widgets/primary_button_widget.dart';
@@ -21,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    _userCubit = context.read<UserCubit>();
+    _userCubit = Modular.get<UserCubit>();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }

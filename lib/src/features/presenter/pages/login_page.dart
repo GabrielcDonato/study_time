@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:study_time/src/core/routes/app_named_routes.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
 import 'package:study_time/src/core/widgets/primary_button_widget.dart';
@@ -93,8 +95,7 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.sizeOf(context).width * 0.8,
               child: GeneralButtonWidget(
                 state: ButtonState.secondary,
-                onPressed: () => Navigator.pushNamed(
-                  context,
+                onPressed: () => Modular.to.navigate(
                   AppNamedRoutes.registerPage,
                 ),
                 title: 'Registrar',

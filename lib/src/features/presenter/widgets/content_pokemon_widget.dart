@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/core/arguments/details_pokemon/details_pokemon_argument.dart';
 import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
@@ -38,7 +39,7 @@ class _ContentPokemonWidgetState extends State<ContentPokemonWidget> {
             (pokemon) => PokemonItemWidget(
               userId: widget.userId,
               onTap: () {
-                Navigator.of(context).pushNamed(
+                Modular.to.pushNamed(
                   AppNamedRoutes.detailsPokemonPage,
                   arguments: DetailsPokemonArgument(
                     numPokemon: pokemon.numPokemon,

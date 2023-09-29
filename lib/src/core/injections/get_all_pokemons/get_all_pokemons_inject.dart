@@ -1,4 +1,4 @@
-import 'package:get_it/get_it.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/core/dio/pokedex_dio.dart';
 import 'package:study_time/src/features/data/datasources/get_all_pokemons/get_all_pokemons_datasource.dart';
 import 'package:study_time/src/features/data/datasources/get_all_pokemons/get_all_pokemons_datasource_impl.dart';
@@ -8,22 +8,22 @@ import 'package:study_time/src/features/domain/usecases/get_all_pokemons/get_all
 import 'package:study_time/src/features/domain/usecases/get_all_pokemons/get_all_pokemons_usecase_impl.dart';
 
 sealed class GetAllPokemonsInject {
-  static void inject(GetIt getIt) {
-    getIt.registerFactory<GetAllPokemonsDatasource>(
+  static void inject(Injector i) {
+    i.add<GetAllPokemonsDatasource>(
       () => GetAllPokemonsDatasourceImpl(
-        dio: getIt.get<PokedexDio>(),
+        dio: i.get<PokedexDio>(),
       ),
     );
 
-    getIt.registerFactory<GetAllPokemonsRepository>(
+    i.add<GetAllPokemonsRepository>(
       () => GetAllPokemonsRepositoryImpl(
-        getAllPokemonsDatasource: getIt.get<GetAllPokemonsDatasource>(),
+        getAllPokemonsDatasource: i.get<GetAllPokemonsDatasource>(),
       ),
     );
 
-    getIt.registerFactory<GetAllPokemonsUsecase>(
+    i.add<GetAllPokemonsUsecase>(
       () => GetAllPokemonsUsecaseImpl(
-        getAllPokemonsRepository: getIt.get<GetAllPokemonsRepository>(),
+        getAllPokemonsRepository: i.get<GetAllPokemonsRepository>(),
       ),
     );
   }

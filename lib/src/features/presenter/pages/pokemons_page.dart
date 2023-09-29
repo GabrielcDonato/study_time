@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
@@ -70,8 +72,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () => Navigator.pushNamed(
-                          context,
+                        onPressed: () => Modular.to.pushNamed(
                           AppNamedRoutes.favoritePokemonsPage,
                           arguments: FavoritesPokemonsArgument(
                             uId: widget.argument.uId,

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/features/data/datasources/favorite_pokemons/favorite_pokemons_datasource.dart';
 import 'package:study_time/src/features/data/datasources/favorite_pokemons/favorite_pokemons_datasource_impl.dart';
 import 'package:study_time/src/features/data/repositories/favorite_pokemons/favorite_pokemons_repository_impl.dart';
@@ -10,28 +10,28 @@ import 'package:study_time/src/features/domain/usecases/favorite_pokemons/remove
 import 'package:study_time/src/features/domain/usecases/favorite_pokemons/remove_favorite_pokemon_usecase_impl.dart';
 
 sealed class FavoritePokemonsInject {
-  static void inject(GetIt getIt) {
-    getIt.registerFactory<FavoritePokemonsDatasource>(
+  static void inject(Injector i) {
+    i.add<FavoritePokemonsDatasource>(
       () => FavoritePokemonsDatasourceImpl(
-        firebaseFirestore: getIt.get<FirebaseFirestore>(),
+        firebaseFirestore: i.get<FirebaseFirestore>(),
       ),
     );
 
-    getIt.registerFactory<FavoritePokemonsRepository>(
+    i.add<FavoritePokemonsRepository>(
       () => FavoritePokemonsRepositoryImpl(
-        favoritePokemonsDatasource: getIt.get<FavoritePokemonsDatasource>(),
+        favoritePokemonsDatasource: i.get<FavoritePokemonsDatasource>(),
       ),
     );
 
-    getIt.registerFactory<AddFavoritePokemonUsecase>(
+    i.add<AddFavoritePokemonUsecase>(
       () => AddFavoritePokemonUsecaseImpl(
-        favoritePokemonsRepository: getIt.get<FavoritePokemonsRepository>(),
+        favoritePokemonsRepository: i.get<FavoritePokemonsRepository>(),
       ),
     );
 
-    getIt.registerFactory<RemoveFavoritePokemonUsecase>(
+    i.add<RemoveFavoritePokemonUsecase>(
       () => RemoveFavoritePokemonUsecaseImpl(
-        favoritePokemonsRepository: getIt.get<FavoritePokemonsRepository>(),
+        favoritePokemonsRepository: i.get<FavoritePokemonsRepository>(),
       ),
     );
   }
