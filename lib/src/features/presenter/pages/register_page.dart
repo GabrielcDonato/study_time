@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
-import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/core/widgets/custom_snack_bar_widget.dart';
 import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
@@ -76,10 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     );
                   }
                   if (state is UserSuccess) {
-                    Modular.to.pushNamedAndRemoveUntil(
-                      AppNamedRoutes.loginPage,
-                      (p0) => false,
-                    );
+                    Modular.to.pop();
                   }
                 },
                 builder: (context, state) {

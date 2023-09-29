@@ -68,6 +68,7 @@ class _LoginPageState extends State<LoginPage> {
             if (state is UserSuccess) {
               CustomSnackBarWidget.show(
                 backgroundColor: Colors.lightGreen,
+                customDuration: const Duration(seconds: 2),
                 context: context,
                 title:
                     "Usuario cadastrado com sucesso por favor confirme seu e-mail para logar",
