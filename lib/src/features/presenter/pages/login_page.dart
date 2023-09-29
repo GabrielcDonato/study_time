@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
@@ -56,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                 arguments: PokemonArgument(
                   uId: state.user.uid,
                 ),
-                // (p0) => false,
               );
             }
             if (state is LogoutSuccess) {

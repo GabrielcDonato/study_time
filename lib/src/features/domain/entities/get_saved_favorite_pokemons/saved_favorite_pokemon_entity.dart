@@ -1,9 +1,9 @@
-class SavedFavoritePokemonEntity {
+base class SavedFavoritePokemonEntity {
   final String idPokemon;
   final String namePokemon;
   final String imagePokemon;
 
-  SavedFavoritePokemonEntity({
+  const SavedFavoritePokemonEntity({
     required this.idPokemon,
     required this.namePokemon,
     required this.imagePokemon,

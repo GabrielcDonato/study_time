@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:study_time/src/features/domain/entities/user/user_entity.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_in_user_usecase.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_out_user_usecase.dart';

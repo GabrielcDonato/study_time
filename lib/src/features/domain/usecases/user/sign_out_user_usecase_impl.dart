@@ -10,5 +10,5 @@ final class SignOutUserUsecaseImpl implements SignOutUserUsecase {
       : _userRepository = userRepository;
 
   @override
-  Future<Either<UserFailure, bool>> call() => _userRepository.signOut();
+  Future<Either<Failure, bool>> call() => _userRepository.signOut();
 }

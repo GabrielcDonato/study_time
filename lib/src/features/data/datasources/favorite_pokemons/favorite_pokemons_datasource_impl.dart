@@ -4,7 +4,8 @@ import 'package:study_time/src/features/data/datasources/favorite_pokemons/favor
 import 'package:study_time/src/features/data/models/favorite_pokemons/favorite_pokemons_model.dart';
 import 'package:collection/collection.dart';
 
-class FavoritePokemonsDatasourceImpl implements FavoritePokemonsDatasource {
+final class FavoritePokemonsDatasourceImpl
+    implements FavoritePokemonsDatasource {
   final FirebaseFirestore _firebaseFirestore;
 
   FavoritePokemonsDatasourceImpl({required FirebaseFirestore firebaseFirestore})
@@ -33,9 +34,11 @@ class FavoritePokemonsDatasourceImpl implements FavoritePokemonsDatasource {
               favoritePokemonsModel.idPokemon);
 
           if (duplicatedPokemon == null) {
-            pokemonsList.add({
-              "pokemon": favoritePokemonsModel.toJson(),
-            });
+            pokemonsList.add(
+              {
+                "pokemon": favoritePokemonsModel.toJson(),
+              },
+            );
             data["pokemons"] = pokemonsList;
             docRef.update(data);
           } else {
@@ -50,13 +53,15 @@ class FavoritePokemonsDatasourceImpl implements FavoritePokemonsDatasource {
           docRef.set(data);
         }
       } else {
-        await docRef.set({
-          "pokemons": [
-            {
-              "pokemon": favoritePokemonsModel.toJson(),
-            }
-          ]
-        });
+        await docRef.set(
+          {
+            "pokemons": [
+              {
+                "pokemon": favoritePokemonsModel.toJson(),
+              }
+            ]
+          },
+        );
       }
 
       return true;
@@ -79,31 +84,24 @@ class FavoritePokemonsDatasourceImpl implements FavoritePokemonsDatasource {
 
       final documentSnapshot = await docRef.get();
 
-      // if (documentSnapshot.exists) {
       final data = documentSnapshot.data() as Map<String, dynamic>;
 
       if (data.containsKey('pokemons')) {
         List<Map<String, dynamic>> pokemonsList = List.from(data["pokemons"]);
 
-        // Encontre o índice do Pokémon com o pokemonId fornecido
         int indexToRemove = pokemonsList.indexWhere(
             (pokemon) => pokemon['pokemon']['idPokemon'] == pokemonId);
 
         if (indexToRemove != -1) {
-          // Remova o Pokémon da lista
           pokemonsList.removeAt(indexToRemove);
 
-          // Atualize a lista no Firebase Firestore
           data["pokemons"] = pokemonsList;
           await docRef.update(data);
 
-          // O Pokémon foi removido da lista
           return true;
         }
       }
-      // }
 
-      // O documento não existe, não há lista de pokemons ou o Pokémon não foi encontrado, retorne false
       return false;
     } catch (e, s) {
       throw FavoritePokemonsExceptions(

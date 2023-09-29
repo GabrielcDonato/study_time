@@ -1,5 +1,5 @@
-class AbilitiyEntity {
+base class AbilitiyEntity {
   final String name;
 
-  AbilitiyEntity({required this.name});
+  const AbilitiyEntity({required this.name});
 }

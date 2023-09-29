@@ -3,7 +3,7 @@ import 'package:study_time/src/core/errors/exceptions/exceptions.dart';
 import 'package:study_time/src/features/data/datasources/user/user_datasource.dart';
 import 'package:study_time/src/features/data/models/user/user_model.dart';
 
-class UserDatasourceImpl implements UserDatasource {
+final class UserDatasourceImpl implements UserDatasource {
   final FirebaseAuth _firebaseAuth;
   UserDatasourceImpl({
     required FirebaseAuth firebaseAuth,

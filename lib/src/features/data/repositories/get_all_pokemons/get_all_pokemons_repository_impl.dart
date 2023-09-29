@@ -5,7 +5,7 @@ import 'package:study_time/src/features/data/datasources/get_all_pokemons/get_al
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
 import 'package:study_time/src/features/domain/repositories/get_all_pokemons/get_all_pokemons_repository.dart';
 
-class GetAllPokemonsRepositoryImpl implements GetAllPokemonsRepository {
+final class GetAllPokemonsRepositoryImpl implements GetAllPokemonsRepository {
   final GetAllPokemonsDatasource _getAllPokemonsDatasource;
 
   GetAllPokemonsRepositoryImpl(
@@ -18,7 +18,11 @@ class GetAllPokemonsRepositoryImpl implements GetAllPokemonsRepository {
       final result = await _getAllPokemonsDatasource();
       return Right(result);
     } on PokedexExceptions catch (e) {
-      return Left(GetAllPokemonsFailure(message: e.toString()));
+      return Left(
+        GetAllPokemonsFailure(
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

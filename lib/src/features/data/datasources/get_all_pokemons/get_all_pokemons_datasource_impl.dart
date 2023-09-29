@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:study_time/src/core/dio/pokedex_dio.dart';
 import 'package:study_time/src/core/endpoints/endpoints.dart';
@@ -7,7 +6,7 @@ import 'package:study_time/src/core/errors/exceptions/exceptions.dart';
 import 'package:study_time/src/features/data/datasources/get_all_pokemons/get_all_pokemons_datasource.dart';
 import 'package:study_time/src/features/data/models/get_all_pokemons/get_all_pokemons_model.dart';
 
-class GetAllPokemonsDatasourceImpl implements GetAllPokemonsDatasource {
+final class GetAllPokemonsDatasourceImpl implements GetAllPokemonsDatasource {
   final PokedexDio _dio;
 
   GetAllPokemonsDatasourceImpl({

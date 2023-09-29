@@ -1,6 +1,6 @@
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
 
-class PokemonsModel extends PokemonEntity {
+final class PokemonsModel extends PokemonEntity {
   PokemonsModel({
     required super.name,
     required super.type,

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/errors/failures/failures.dart';
+import 'package:study_time/src/core/errors/failures/export_failures.dart';
 
 abstract interface class SignOutUserUsecase {
-  Future<Either<UserFailure, bool>> call();
+  Future<Either<Failure, bool>> call();
 }

@@ -1,6 +1,6 @@
 import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokemons/saved_favorite_pokemon_entity.dart';
 
-class SavedFavoritePokemonModel extends SavedFavoritePokemonEntity {
+final class SavedFavoritePokemonModel extends SavedFavoritePokemonEntity {
   SavedFavoritePokemonModel({
     required super.idPokemon,
     required super.namePokemon,

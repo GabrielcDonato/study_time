@@ -4,7 +4,8 @@ import 'package:study_time/src/core/errors/exceptions/export_exceptions.dart';
 import 'package:study_time/src/features/data/datasources/get_details_pokemon/get_details_pokemon_datasource.dart';
 import 'package:study_time/src/features/data/models/get_details_pokemon/details_pokemon_model.dart';
 
-class GetDetailsPokemonDatasourceImpl implements GetDetailsPokemonDatasource {
+final class GetDetailsPokemonDatasourceImpl
+    implements GetDetailsPokemonDatasource {
   final PokedexDio _dio;
 
   GetDetailsPokemonDatasourceImpl({

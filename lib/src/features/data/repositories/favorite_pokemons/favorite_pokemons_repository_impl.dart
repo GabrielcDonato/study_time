@@ -6,7 +6,8 @@ import 'package:study_time/src/features/data/models/favorite_pokemons/favorite_p
 import 'package:study_time/src/features/domain/entities/favorite_pokemons/favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/domain/repositories/favorite_pokemons/favorite_pokemons_repository.dart';
 
-class FavoritePokemonsRepositoryImpl implements FavoritePokemonsRepository {
+final class FavoritePokemonsRepositoryImpl
+    implements FavoritePokemonsRepository {
   final FavoritePokemonsDatasource _favoritePokemonsDatasource;
 
   FavoritePokemonsRepositoryImpl(
@@ -27,7 +28,11 @@ class FavoritePokemonsRepositoryImpl implements FavoritePokemonsRepository {
       );
       return Right(result);
     } on FavoritePokemonsExceptions catch (e) {
-      return Left(FavoritePokemonsFailure(message: e.toString()));
+      return Left(
+        FavoritePokemonsFailure(
+          message: e.toString(),
+        ),
+      );
     }
   }
 
@@ -43,7 +48,11 @@ class FavoritePokemonsRepositoryImpl implements FavoritePokemonsRepository {
       );
       return Right(result);
     } on FavoritePokemonsExceptions catch (e) {
-      return Left(FavoritePokemonsFailure(message: e.toString()));
+      return Left(
+        FavoritePokemonsFailure(
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

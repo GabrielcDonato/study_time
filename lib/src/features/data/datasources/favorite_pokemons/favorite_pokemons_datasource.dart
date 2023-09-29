@@ -1,6 +1,6 @@
 import 'package:study_time/src/features/data/models/favorite_pokemons/favorite_pokemons_model.dart';
 
-abstract class FavoritePokemonsDatasource {
+abstract interface class FavoritePokemonsDatasource {
   Future<bool> add({
     required FavoritePokemonsModel favoritePokemonsModel,
     required String userId,

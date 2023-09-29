@@ -7,7 +7,7 @@ import 'package:study_time/src/features/data/models/user/user_model.dart';
 import 'package:study_time/src/features/domain/entities/user/user_entity.dart';
 import 'package:study_time/src/features/domain/repositories/user/user_repository.dart';
 
-class UserRepositoryImpl implements UserRepository {
+final class UserRepositoryImpl implements UserRepository {
   final UserDatasource _userDatasource;
 
   UserRepositoryImpl({required UserDatasource userDatasource})

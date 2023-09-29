@@ -5,7 +5,7 @@ import 'package:study_time/src/features/data/datasources/get_saved_favorite_poke
 import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokemons/get_saved_favorite_pokemons_entity.dart';
 import 'package:study_time/src/features/domain/repositories/get_saved_favorite_pokemons/get_saved_favorite_pokemons_repository.dart';
 
-class GetSavedFavoritePokemonsRepositoryImpl
+final class GetSavedFavoritePokemonsRepositoryImpl
     implements GetSavedFavoritePokemonsRepository {
   final GetSavedFavoritePokemonsDatasource _getSavedFavoritePokemonsDatasource;
 
@@ -23,7 +23,11 @@ class GetSavedFavoritePokemonsRepositoryImpl
 
       return Right(result);
     } on GetSavedFavoritePokemonsExceptions catch (e) {
-      return Left(FavoritePokemonsFailure(message: e.toString()));
+      return Left(
+        FavoritePokemonsFailure(
+          message: e.toString(),
+        ),
+      );
     }
   }
 }

@@ -2,7 +2,7 @@ import 'package:study_time/src/features/data/models/get_details_pokemon/ability_
 import 'package:study_time/src/features/data/models/get_details_pokemon/stats_model.dart';
 import 'package:study_time/src/features/domain/entities/get_details_pokemon/details_pokemon_entity.dart';
 
-class DetailsPokemonModel extends DetailsPokemonEntity {
+final class DetailsPokemonModel extends DetailsPokemonEntity {
   DetailsPokemonModel({
     required super.abilities,
     required super.stats,

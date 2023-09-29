@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PokemonEntity {
+base class PokemonEntity {
   final String name;
   final List<String> type;
   final int id;
   final String numPokemon;
   final String height;
   final String weight;
-  PokemonEntity({
+
+  const PokemonEntity({
     required this.name,
     required this.type,
     required this.id,
@@ -79,11 +80,13 @@ class PokemonEntity {
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        type.hashCode ^
-        id.hashCode ^
-        numPokemon.hashCode ^
-        height.hashCode ^
-        weight.hashCode;
+    return Object.hash(
+      name,
+      id,
+      numPokemon,
+      height,
+      weight,
+      Object.hashAll(type),
+    );
   }
 }

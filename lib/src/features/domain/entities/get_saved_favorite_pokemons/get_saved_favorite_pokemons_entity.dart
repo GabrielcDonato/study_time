@@ -5,7 +5,7 @@ import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokem
 class GetSavedFavoritePokemonsEntity {
   final List<SavedFavoritePokemonEntity> savedPokemons;
 
-  GetSavedFavoritePokemonsEntity({
+  const GetSavedFavoritePokemonsEntity({
     required this.savedPokemons,
   });
 

@@ -12,6 +12,6 @@ final class SignInUserUsecaseImpl implements SignInUserUsecase {
       : _userRepository = userRepository;
 
   @override
-  Future<Either<UserFailure, User?>> call({required UserEntity user}) =>
+  Future<Either<Failure, User?>> call({required UserEntity user}) =>
       _userRepository.signIn(user: user);
 }
