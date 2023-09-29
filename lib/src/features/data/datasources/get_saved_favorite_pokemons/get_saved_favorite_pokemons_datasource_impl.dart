@@ -12,9 +12,10 @@ final class GetSavedFavoritePokemonsDatasourceImpl
       : _firebaseFirestore = firebaseFirestore;
 
   @override
-  Future<GetSavedFavoritePokemonsModel> call() async {
+  Future<GetSavedFavoritePokemonsModel> call({required String userId}) async {
     try {
-      final favorites = _firebaseFirestore.collection('pokemon_favoritos');
+      final favorites =
+          _firebaseFirestore.collection('pokemon_favoritos').doc(userId);
 
       final getFavorites = await favorites.get();
 

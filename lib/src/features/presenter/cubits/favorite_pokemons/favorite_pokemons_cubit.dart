@@ -20,13 +20,15 @@ class FavoritePokemonsCubit extends Cubit<FavoritePokemonsState> {
           const FavoritePokemonsInitial(),
         );
 
-  void removeFromFavorite({
-    required String idPokemon,
+  Future<void> removeFromFavorite({
+    required String userId,
+    required String pokemonId,
   }) async {
     emit(const FavoritePokemonsLoading());
 
     final result = await _removeFavoritePokemonUsecase(
-      idPokemon: idPokemon,
+      pokemonId: pokemonId,
+      userId: userId,
     );
 
     result.fold(
@@ -37,12 +39,13 @@ class FavoritePokemonsCubit extends Cubit<FavoritePokemonsState> {
     );
   }
 
-  void addToFavorite({
-    required FavoritePokemonEntity favoritePokemonEntity,
-  }) async {
+  Future<void> addToFavorite(
+      {required FavoritePokemonEntity favoritePokemonEntity,
+      required String userId}) async {
     emit(const FavoritePokemonsLoading());
 
     final result = await _addFavoritePokemonUsecase(
+      userId: userId,
       favoritePokemonEntity: favoritePokemonEntity,
     );
 

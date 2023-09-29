@@ -4,6 +4,7 @@ import '../../../../core/errors/failures/export_failures.dart';
 
 abstract interface class RemoveFavoritePokemonUsecase {
   Future<Either<Failure, bool>> call({
-    required String idPokemon,
+    required String userId,
+    required String pokemonId,
   });
 }

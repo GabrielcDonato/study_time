@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/features/presenter/cubits/export_cubits.dart';
 import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
 
 class FavoritesPokemonsPage extends StatefulWidget {
-  const FavoritesPokemonsPage({super.key});
+  final FavoritesPokemonsArgument argument;
+  const FavoritesPokemonsPage({super.key, required this.argument});
 
   @override
   State<FavoritesPokemonsPage> createState() => _FavoritesPokemonsPageState();
@@ -19,7 +21,10 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
     super.initState();
 
     _getSavedFavoritePokemonsCubit =
-        context.read<GetSavedFavoritePokemonsCubit>()..getFavorites();
+        context.read<GetSavedFavoritePokemonsCubit>()
+          ..getFavorites(
+            userId: widget.argument.uId,
+          );
 
     _favoritePokemonsCubit = context.read<FavoritePokemonsCubit>();
   }
@@ -91,14 +96,21 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
                               ],
                             ),
                             IconButton(
-                              onPressed: () {
-                                _favoritePokemonsCubit.removeFromFavorite(
-                                  idPokemon: state
-                                      .getSavedFavoritePokemonsEntity
-                                      .savedPokemons[index]
-                                      .idPokemon,
-                                );
-                                _getSavedFavoritePokemonsCubit.getFavorites();
+                              onPressed: () async {
+                                _favoritePokemonsCubit
+                                    .removeFromFavorite(
+                                      pokemonId: state
+                                          .getSavedFavoritePokemonsEntity
+                                          .savedPokemons[index]
+                                          .idPokemon,
+                                      userId: widget.argument.uId,
+                                    )
+                                    .then((value) => {
+                                          _getSavedFavoritePokemonsCubit
+                                              .getFavorites(
+                                            userId: widget.argument.uId,
+                                          ),
+                                        });
                               },
                               icon: const Icon(
                                 Icons.remove_circle_outline_rounded,

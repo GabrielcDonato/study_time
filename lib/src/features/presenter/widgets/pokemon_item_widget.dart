@@ -11,8 +11,9 @@ class PokemonItemWidget extends StatefulWidget {
     required this.onTap,
     required this.name,
     required this.index,
+    required this.userId,
   }) : super(key: key);
-
+  final String userId;
   final PokemonEntity pokemon;
   final void Function() onTap;
   final int index;
@@ -69,6 +70,7 @@ class _PokemonItemWidgetState extends State<PokemonItemWidget> {
                       IconButton(
                         onPressed: () async {
                           _favoritePokemonsCubit.addToFavorite(
+                            userId: widget.userId,
                             favoritePokemonEntity: FavoritePokemonEntity(
                               idPokemon: widget.pokemon.numPokemon,
                               imagePokemon: widget.pokemon.image,

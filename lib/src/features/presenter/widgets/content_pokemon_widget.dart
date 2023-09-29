@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:study_time/src/core/arguments/details_pokemon_argument/details_pokemon_argument.dart';
+import 'package:study_time/src/core/arguments/details_pokemon/details_pokemon_argument.dart';
 import 'package:study_time/src/core/routes/export_routes.dart';
 import 'package:study_time/src/features/domain/entities/get_all_pokemons/pokemon_entity.dart';
-import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokemons/saved_favorite_pokemon_entity.dart';
 import 'package:study_time/src/features/presenter/widgets/pokemon_item_widget.dart';
 
 class ContentPokemonWidget extends StatefulWidget {
+  final String userId;
   final List<PokemonEntity> pokemons;
 
   final String filter;
@@ -13,6 +13,7 @@ class ContentPokemonWidget extends StatefulWidget {
     Key? key,
     this.filter = '',
     required this.pokemons,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -33,24 +34,27 @@ class _ContentPokemonWidgetState extends State<ContentPokemonWidget> {
                       widget.filter.replaceAll("#", ''),
                     ),
           )
-          .map((pokemon) => PokemonItemWidget(
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                    AppNamedRoutes.detailsPokemonPage,
-                    arguments: DetailsPokemonArgument(
-                      numPokemon: pokemon.numPokemon,
-                      image: pokemon.image,
-                      color: pokemon.baseColor!,
-                      name: pokemon.name,
-                      height: pokemon.height,
-                      weight: pokemon.weight,
-                    ),
-                  );
-                },
-                pokemon: pokemon,
-                index: pokemon.id,
-                name: pokemon.name,
-              ))
+          .map(
+            (pokemon) => PokemonItemWidget(
+              userId: widget.userId,
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  AppNamedRoutes.detailsPokemonPage,
+                  arguments: DetailsPokemonArgument(
+                    numPokemon: pokemon.numPokemon,
+                    image: pokemon.image,
+                    color: pokemon.baseColor!,
+                    name: pokemon.name,
+                    height: pokemon.height,
+                    weight: pokemon.weight,
+                  ),
+                );
+              },
+              pokemon: pokemon,
+              index: pokemon.id,
+              name: pokemon.name,
+            ),
+          )
           .toList(),
     );
   }

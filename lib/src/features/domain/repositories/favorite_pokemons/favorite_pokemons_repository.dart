@@ -5,9 +5,11 @@ import 'package:study_time/src/features/domain/entities/favorite_pokemons/favori
 abstract interface class FavoritePokemonsRepository {
   Future<Either<Failure, bool>> add({
     required FavoritePokemonEntity favoritePokemonEntity,
+    required String userId,
   });
 
   Future<Either<Failure, bool>> remove({
-    required String idPokemon,
+    required String userId,
+    required String pokemonId,
   });
 }

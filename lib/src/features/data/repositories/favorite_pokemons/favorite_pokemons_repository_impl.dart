@@ -14,10 +14,13 @@ class FavoritePokemonsRepositoryImpl implements FavoritePokemonsRepository {
       : _favoritePokemonsDatasource = favoritePokemonsDatasource;
 
   @override
-  Future<Either<Failure, bool>> add(
-      {required FavoritePokemonEntity favoritePokemonEntity}) async {
+  Future<Either<Failure, bool>> add({
+    required FavoritePokemonEntity favoritePokemonEntity,
+    required String userId,
+  }) async {
     try {
       final result = await _favoritePokemonsDatasource.add(
+        userId: userId,
         favoritePokemonsModel: FavoritePokemonsModel.fromEntity(
           favoritePokemonEntity: favoritePokemonEntity,
         ),
@@ -29,10 +32,14 @@ class FavoritePokemonsRepositoryImpl implements FavoritePokemonsRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> remove({required String idPokemon}) async {
+  Future<Either<Failure, bool>> remove({
+    required String userId,
+    required String pokemonId,
+  }) async {
     try {
       final result = await _favoritePokemonsDatasource.remove(
-        idPokemon: idPokemon,
+        userId: userId,
+        pokemonId: pokemonId,
       );
       return Right(result);
     } on FavoritePokemonsExceptions catch (e) {

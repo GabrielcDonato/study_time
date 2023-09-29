@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_time/src/core/arguments/details_pokemon_argument/details_pokemon_argument.dart';
+import 'package:study_time/src/core/arguments/details_pokemon/details_pokemon_argument.dart';
+import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
 import 'package:study_time/src/features/presenter/pages/details_pokemon_page.dart';
 import 'package:study_time/src/features/presenter/pages/favorites_pokemons_page.dart';
@@ -38,7 +39,10 @@ sealed class RouteGenerator {
 
       case AppNamedRoutes.favoritePokemonsPage:
         return MaterialPageRoute(
-            builder: (context) => const FavoritesPokemonsPage());
+          builder: (context) => FavoritesPokemonsPage(
+            argument: args as FavoritesPokemonsArgument,
+          ),
+        );
     }
 
     return null;

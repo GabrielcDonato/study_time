@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:study_time/src/core/arguments/details_pokemon_argument/details_pokemon_argument.dart';
+import 'package:study_time/src/core/arguments/details_pokemon/details_pokemon_argument.dart';
 
 class DetailsPokemonPage extends StatelessWidget {
   final DetailsPokemonArgument arguments;

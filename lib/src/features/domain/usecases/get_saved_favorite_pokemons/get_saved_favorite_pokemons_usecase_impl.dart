@@ -14,6 +14,8 @@ final class GetSavedFavoritePokemonsUsecaseImpl
   }) : _getSavedFavoritePokemonsRepository = getSavedFavoritePokemonsRepository;
 
   @override
-  Future<Either<Failure, GetSavedFavoritePokemonsEntity>> call() =>
-      _getSavedFavoritePokemonsRepository.getAllFavoritesPokemons();
+  Future<Either<Failure, GetSavedFavoritePokemonsEntity>> call(
+          {required String userId}) =>
+      _getSavedFavoritePokemonsRepository.getAllFavoritesPokemons(
+          userId: userId);
 }

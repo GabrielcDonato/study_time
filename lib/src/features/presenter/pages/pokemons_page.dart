@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
-import 'package:study_time/src/core/widgets/primary_button_state.dart';
-import 'package:study_time/src/core/widgets/primary_button_widget.dart';
 
 import 'package:study_time/src/features/presenter/cubits/get_all_pokemons/get_all_pokemons_cubit.dart';
-import 'package:study_time/src/features/presenter/cubits/get_saved_favorite_pokemons/get_saved_favorite_pokemons_cubit.dart';
 import 'package:study_time/src/features/presenter/cubits/user/user_cubit.dart';
 import 'package:study_time/src/features/presenter/widgets/content_pokemon_widget.dart';
 
@@ -75,6 +73,9 @@ class _PokemonsPageState extends State<PokemonsPage> {
                         onPressed: () => Navigator.pushNamed(
                           context,
                           AppNamedRoutes.favoritePokemonsPage,
+                          arguments: FavoritesPokemonsArgument(
+                            uId: widget.argument.uId,
+                          ),
                         ),
                         icon: const Icon(
                           Icons.heart_broken,
@@ -147,6 +148,7 @@ class _PokemonsPageState extends State<PokemonsPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ContentPokemonWidget(
+                            userId: widget.argument.uId,
                             pokemons: state.pokemons,
                             filter: state.filter ?? '',
                           ),

@@ -7,15 +7,14 @@ final class GetSavedFavoritePokemonsModel
   GetSavedFavoritePokemonsModel({required super.savedPokemons});
 
   factory GetSavedFavoritePokemonsModel.fromSnapshot(
-      QuerySnapshot<Map<String, dynamic>> snapshot) {
-    final savedPokemons = snapshot.docs.map(
-      (DocumentSnapshot document) {
-        Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-        return SavedFavoritePokemonModel.fromJson(data);
-      },
-    ).toList();
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return GetSavedFavoritePokemonsModel(
-      savedPokemons: savedPokemons,
+      savedPokemons: List<SavedFavoritePokemonModel>.from(
+        (snapshot['pokemons'] as List<dynamic>).map<SavedFavoritePokemonModel>(
+          (pokemon) => SavedFavoritePokemonModel.fromJson(
+              pokemon as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }

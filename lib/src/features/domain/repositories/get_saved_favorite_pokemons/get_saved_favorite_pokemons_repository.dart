@@ -4,5 +4,5 @@ import 'package:study_time/src/features/domain/entities/get_saved_favorite_pokem
 
 abstract interface class GetSavedFavoritePokemonsRepository {
   Future<Either<Failure, GetSavedFavoritePokemonsEntity>>
-      getAllFavoritesPokemons();
+      getAllFavoritesPokemons({required String userId});
 }

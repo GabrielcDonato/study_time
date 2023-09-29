@@ -17,9 +17,9 @@ class GetSavedFavoritePokemonsRepositoryImpl
 
   @override
   Future<Either<Failure, GetSavedFavoritePokemonsEntity>>
-      getAllFavoritesPokemons() async {
+      getAllFavoritesPokemons({required String userId}) async {
     try {
-      final result = await _getSavedFavoritePokemonsDatasource();
+      final result = await _getSavedFavoritePokemonsDatasource(userId: userId);
 
       return Right(result);
     } on GetSavedFavoritePokemonsExceptions catch (e) {

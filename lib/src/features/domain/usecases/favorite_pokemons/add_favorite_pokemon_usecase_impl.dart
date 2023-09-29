@@ -12,9 +12,12 @@ class AddFavoritePokemonUsecaseImpl implements AddFavoritePokemonUsecase {
       : _favoritePokemonsRepository = favoritePokemonsRepository;
 
   @override
-  Future<Either<Failure, bool>> call(
-          {required FavoritePokemonEntity favoritePokemonEntity}) =>
+  Future<Either<Failure, bool>> call({
+    required FavoritePokemonEntity favoritePokemonEntity,
+    required String userId,
+  }) =>
       _favoritePokemonsRepository.add(
+        userId: userId,
         favoritePokemonEntity: favoritePokemonEntity,
       );
 }

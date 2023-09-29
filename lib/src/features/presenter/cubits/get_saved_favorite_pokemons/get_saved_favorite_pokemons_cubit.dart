@@ -17,8 +17,8 @@ class GetSavedFavoritePokemonsCubit
           const GetSavedFavoritePokemonsInitial(),
         );
 
-  void getFavorites() async {
-    final result = await _getSavedFavoritePokemonsUsecase();
+  void getFavorites({required String userId}) async {
+    final result = await _getSavedFavoritePokemonsUsecase(userId: userId);
     emit(
       const GetSavedFavoritePokemonsLoading(),
     );
