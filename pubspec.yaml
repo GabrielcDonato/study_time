@@ -24,11 +24,18 @@ dependencies:
   google_fonts: ^4.0.4
   collection: ^1.17.1
   flutter_modular: 6.3.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "lib/assets/icon/icon_launcher.jpg"
+  min_sdk_android: 21 
+  
 
 flutter:
   uses-material-design: true
