@@ -5,9 +5,14 @@ import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.
 import 'package:study_time/src/features/presenter/pages/pokemons_page.dart';
 import 'package:study_time/src/features/presenter/pages/login_page.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(

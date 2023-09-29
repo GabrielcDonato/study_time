@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:study_time/src/core/routes/app_named_routes.dart';
+import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 import 'package:study_time/src/core/widgets/primary_button_state.dart';
 import 'package:study_time/src/core/widgets/primary_button_widget.dart';
 import 'package:study_time/src/features/domain/entities/user/user_entity.dart';
@@ -38,70 +39,72 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.red,
-        title: const Text('Login'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                  ),
-                ],
+    return HideKeyboardWidget(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.red,
+          title: const Text('Login'),
+        ),
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            BlocConsumer<UserCubit, UserState>(
-              listener: (context, state) {
-                if (state is UserError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.message),
+              BlocConsumer<UserCubit, UserState>(
+                listener: (context, state) {
+                  if (state is UserError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.message),
+                      ),
+                    );
+                  }
+                },
+                bloc: _userCubit,
+                builder: (context, state) {
+                  return SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.8,
+                    child: GeneralButtonWidget(
+                      isLoading: state is UserLoading,
+                      onPressed: () {
+                        _userCubit.login(
+                          user: UserEntity(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                      },
+                      title: 'Logar',
                     ),
                   );
-                }
-              },
-              bloc: _userCubit,
-              builder: (context, state) {
-                return SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.8,
-                  child: GeneralButtonWidget(
-                    isLoading: state is UserLoading,
-                    onPressed: () {
-                      _userCubit.login(
-                        user: UserEntity(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        ),
-                      );
-                    },
-                    title: 'Logar',
-                  ),
-                );
-              },
-            ),
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.8,
-              child: GeneralButtonWidget(
-                state: ButtonState.secondary,
-                onPressed: () => Modular.to.navigate(
-                  AppNamedRoutes.registerPage,
-                ),
-                title: 'Registrar',
+                },
               ),
-            ),
-          ],
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.8,
+                child: GeneralButtonWidget(
+                  state: ButtonState.secondary,
+                  onPressed: () => Modular.to.pushNamed(
+                    AppNamedRoutes.registerPage,
+                  ),
+                  title: 'Registrar',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

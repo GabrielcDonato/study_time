@@ -40,6 +40,13 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
           GetSavedFavoritePokemonsState>(
         bloc: _getSavedFavoritePokemonsCubit,
         builder: (context, state) {
+          if (state is GetSavedFavoritePokemonsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is GetSavedFavoritePokemonsSuccessEmpty) {
+            return const Center(
+                child: Text('Você não possui nenhum pokemon nos favoritos'));
+          }
           if (state is GetSavedFavoritePokemonsSuccess) {
             return ListView.builder(
               itemCount:
@@ -66,7 +73,7 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
                       );
                     }
                   },
-                  builder: (context, stateFavorite) {
+                  builder: (context, _) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
@@ -129,9 +136,7 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
           if (state is GetSavedFavoritePokemonsError) {
             return const Text('deu erro');
           }
-          if (state is GetSavedFavoritePokemonsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+
           return const SizedBox.shrink();
         },
       ),

@@ -34,3 +34,10 @@ final class GetSavedFavoritePokemonsSuccess
         getSavedFavoritePokemonsEntity,
       ];
 }
+
+final class GetSavedFavoritePokemonsSuccessEmpty
+    extends GetSavedFavoritePokemonsSuccess {
+  const GetSavedFavoritePokemonsSuccessEmpty({
+    required super.getSavedFavoritePokemonsEntity,
+  });
+}

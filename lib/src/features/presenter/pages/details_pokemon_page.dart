@@ -47,7 +47,6 @@ class DetailsPokemonPage extends StatelessWidget {
                 SizedBox(
                   child: Center(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 32,
@@ -79,11 +78,11 @@ class DetailsPokemonPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 140,
+            top: 100,
             left: 100,
             child: Image.network(
               arguments.image,
-              height: 200,
+              height: 150,
             ),
           ),
         ],

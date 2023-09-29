@@ -18,18 +18,26 @@ class GetSavedFavoritePokemonsCubit
         );
 
   void getFavorites({required String userId}) async {
-    final result = await _getSavedFavoritePokemonsUsecase(userId: userId);
     emit(
       const GetSavedFavoritePokemonsLoading(),
     );
+    final result = await _getSavedFavoritePokemonsUsecase(userId: userId);
+
     result.fold(
-      (l) => emit(
-        const GetSavedFavoritePokemonsError(),
-      ),
-      (getSavedFavoritePokemonsEntity) => emit(
-        GetSavedFavoritePokemonsSuccess(
-            getSavedFavoritePokemonsEntity: getSavedFavoritePokemonsEntity),
-      ),
-    );
+        (l) => emit(
+              const GetSavedFavoritePokemonsError(),
+            ), (getSavedFavoritePokemonsEntity) {
+      if (getSavedFavoritePokemonsEntity.savedPokemons.isEmpty) {
+        emit(
+          GetSavedFavoritePokemonsSuccessEmpty(
+              getSavedFavoritePokemonsEntity: getSavedFavoritePokemonsEntity),
+        );
+      } else {
+        emit(
+          GetSavedFavoritePokemonsSuccess(
+              getSavedFavoritePokemonsEntity: getSavedFavoritePokemonsEntity),
+        );
+      }
+    });
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart'
 import 'package:study_time/src/core/arguments/favorites_pokemons_argument/favorites_pokemons_argument.dart';
 import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
 import 'package:study_time/src/core/routes/app_named_routes.dart';
+import 'package:study_time/src/core/widgets/hide_keyboard_widget.dart';
 
 import 'package:study_time/src/features/presenter/cubits/get_all_pokemons/get_all_pokemons_cubit.dart';
 import 'package:study_time/src/features/presenter/cubits/user/user_cubit.dart';
@@ -64,100 +65,102 @@ class _PokemonsPageState extends State<PokemonsPage> {
         }
 
         if (state is GetAllPokemonsSuccess) {
-          return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(100.0),
-              child: AppBar(
-                actions: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () => Modular.to.pushNamed(
-                          AppNamedRoutes.favoritePokemonsPage,
-                          arguments: FavoritesPokemonsArgument(
-                            uId: widget.argument.uId,
+          return HideKeyboardWidget(
+            child: Scaffold(
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(100.0),
+                child: AppBar(
+                  actions: [
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Modular.to.pushNamed(
+                            AppNamedRoutes.favoritePokemonsPage,
+                            arguments: FavoritesPokemonsArgument(
+                              uId: widget.argument.uId,
+                            ),
+                          ),
+                          icon: const Icon(
+                            Icons.heart_broken,
                           ),
                         ),
-                        icon: const Icon(
-                          Icons.heart_broken,
+                        IconButton(
+                          onPressed: () => _userCubit.logout(),
+                          icon: const Icon(
+                            Icons.logout,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () => _userCubit.logout(),
-                        icon: const Icon(
-                          Icons.logout,
+                      ],
+                    )
+                  ],
+                  toolbarHeight: 200,
+                  backgroundColor: const Color(
+                    0xffDC0A2D,
+                  ),
+                  title: SizedBox(
+                    height: 50,
+                    width: 280,
+                    child: TextField(
+                      controller: _searchController,
+                      style: const TextStyle(color: Colors.black),
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-                toolbarHeight: 200,
-                backgroundColor: const Color(
-                  0xffDC0A2D,
-                ),
-                title: SizedBox(
-                  height: 50,
-                  width: 280,
-                  child: TextField(
-                    controller: _searchController,
-                    style: const TextStyle(color: Colors.black),
-                    cursorColor: Colors.red,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      prefixIcon: const Icon(Icons.search),
-                      prefixIconColor: Colors.red,
-                      hintStyle: const TextStyle(
-                        color: Color(
-                          0xff666666,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                        fontSize: 10,
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: const Icon(Icons.search),
+                        prefixIconColor: Colors.red,
+                        hintStyle: const TextStyle(
+                          color: Color(
+                            0xff666666,
+                          ),
+                          fontSize: 10,
+                        ),
+                        border: InputBorder.none,
                       ),
-                      border: InputBorder.none,
+                      onChanged: (value) {
+                        _getAllPokemonsCubit.filterPokemon(namePokemon: value);
+                      },
                     ),
-                    onChanged: (value) {
-                      _getAllPokemonsCubit.filterPokemon(namePokemon: value);
-                    },
                   ),
                 ),
               ),
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    color: const Color(
-                      0xffDC0A2D,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ContentPokemonWidget(
-                            userId: widget.argument.uId,
-                            pokemons: state.pokemons,
-                            filter: state.filter ?? '',
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color(
+                        0xffDC0A2D,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ContentPokemonWidget(
+                              userId: widget.argument.uId,
+                              pokemons: state.pokemons,
+                              filter: state.filter ?? '',
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
