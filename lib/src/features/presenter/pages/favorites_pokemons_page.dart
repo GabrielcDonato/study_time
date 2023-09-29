@@ -139,7 +139,11 @@ class _FavoritesPokemonsPageState extends State<FavoritesPokemonsPage> {
           }
 
           if (state is GetSavedFavoritePokemonsError) {
-            return const Text('deu erro');
+            return const Center(
+              child: Text(
+                'Você ainda não possui pokemons nos favoritos, que tal adicionar alguns?',
+              ),
+            );
           }
 
           return const SizedBox.shrink();

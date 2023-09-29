@@ -58,8 +58,10 @@ class _PokemonsPageState extends State<PokemonsPage> {
         }
         if (state is GetAllPokemonsError) {
           return const Material(
-            child: Text(
-              "Deu erro",
+            child: Center(
+              child: Text(
+                "Ocorreu um erro no carregamento da página, por favor tente novamente.",
+              ),
             ),
           );
         }
