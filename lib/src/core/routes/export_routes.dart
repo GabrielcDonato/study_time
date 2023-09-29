@@ -1,1 +1,1 @@
-export 'study_time_named_routes.dart';
+export 'app_named_routes.dart';

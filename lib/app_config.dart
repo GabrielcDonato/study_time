@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:study_time/firebase_options.dart';
 import 'package:study_time/src/core/injector/injector.dart';
 
-class StudyTimeAppConfig {
+final class AppConfig {
   Future<void> configureApp() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(

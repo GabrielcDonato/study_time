@@ -13,13 +13,12 @@ class UserDatasourceImpl implements UserDatasource {
   Future<User?> signUp({required UserModel user}) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
+        email: user.email,
+        password: user.password,
+      );
 
       return userCredential.user;
     } on FirebaseAuthException catch (exception, stackTrace) {
-      print(exception);
-      print(stackTrace);
-
 //email-already-exists
       if (exception.code == 'email-already-in-use') {
         final loginTypes =
@@ -32,9 +31,10 @@ class UserDatasourceImpl implements UserDatasource {
           );
         } else {
           throw UserException(
-              message:
-                  'voce se cadastrou no studytime pelo google, por favor utilize ele para entrar',
-              stackTrace: stackTrace);
+            message:
+                'Voce se cadastrou no App pelo google, por favor utilize ele para entrar',
+            stackTrace: stackTrace,
+          );
         }
       } else {
         throw UserException(
@@ -44,14 +44,58 @@ class UserDatasourceImpl implements UserDatasource {
   }
 
   @override
+  Future<User?> signIn({required UserModel user}) async {
+    try {
+      final loginTypes =
+          await _firebaseAuth.fetchSignInMethodsForEmail(user.email);
+
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: user.email,
+        password: user.password,
+      );
+
+      if (loginTypes.contains('password')) {
+        final userVerified = userCredential.user?.emailVerified ?? false;
+
+        if (!userVerified) {
+          userCredential.user?.sendEmailVerification();
+          throw UserException(
+            message:
+                'Email não confirmado. Por favor, confirme-o em seu email cadastrado.',
+            stackTrace: StackTrace.empty,
+          );
+        }
+      } else {
+        throw UserException(
+          message:
+              'O login não pode ser feito por email e senha. Por favor, utilize outro método.',
+          stackTrace: StackTrace.empty,
+        );
+      }
+      return userCredential.user;
+    } on FirebaseAuthException catch (exception) {
+      if (exception.code.contains('user-not-found')) {
+        throw UserException(
+          message: 'Usuário não existe',
+          stackTrace: StackTrace.empty,
+        );
+      }
+      throw UserException(
+        message: 'Usuário ou senha inválidos!!!',
+        stackTrace: StackTrace.empty,
+      );
+    }
+  }
+
+  @override
   Future<bool> signOut() async {
     try {
       await _firebaseAuth.signOut();
       return true;
-    } catch (e, s) {
+    } catch (exception, stackTrace) {
       throw UserException(
-        message: 'Deu erro para deslogar',
-        stackTrace: s,
+        message: 'Ocorreu um erro ao deslogar',
+        stackTrace: stackTrace,
       );
     }
   }

@@ -4,6 +4,8 @@ import 'package:study_time/src/features/data/datasources/user/user_datasource.da
 import 'package:study_time/src/features/data/datasources/user/user_datasource_impl.dart';
 import 'package:study_time/src/features/data/repositories/user/user_repository_impl.dart';
 import 'package:study_time/src/features/domain/repositories/user/user_repository.dart';
+import 'package:study_time/src/features/domain/usecases/user/sign_in_user_usecase.dart';
+import 'package:study_time/src/features/domain/usecases/user/sign_in_user_usecase_impl.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_out_user_usecase.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_out_user_usecase_impl.dart';
 import 'package:study_time/src/features/domain/usecases/user/sign_up_user_usecase.dart';
@@ -25,6 +27,12 @@ sealed class UserInject {
 
     getIt.registerFactory<SignUpUserUsecase>(
       () => SignUpUserUsecaseImpl(
+        userRepository: getIt.get<UserRepository>(),
+      ),
+    );
+
+    getIt.registerFactory<SignInUserUsecase>(
+      () => SignInUserUsecaseImpl(
         userRepository: getIt.get<UserRepository>(),
       ),
     );

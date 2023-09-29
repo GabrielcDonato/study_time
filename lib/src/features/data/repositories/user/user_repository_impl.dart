@@ -14,11 +14,6 @@ class UserRepositoryImpl implements UserRepository {
       : _userDatasource = userDatasource;
 
   @override
-  Future<Either<UserFailure, User?>> signIn({required UserEntity user}) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<UserFailure, bool>> signOut() async {
     try {
       await _userDatasource.signOut();
@@ -36,6 +31,22 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<UserFailure, User?>> signUp({required UserEntity user}) async {
     try {
       final result = await _userDatasource.signUp(
+        user: UserModel(email: user.email, password: user.password),
+      );
+      return Right(result);
+    } on UserException catch (exception) {
+      return Left(
+        UserFailure(
+          message: exception.message,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, User?>> signIn({required UserEntity user}) async {
+    try {
+      final result = await _userDatasource.signIn(
         user: UserModel(email: user.email, password: user.password),
       );
       return Right(result);

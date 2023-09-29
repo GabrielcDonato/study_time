@@ -17,3 +17,15 @@ abstract interface class Failure {
 final class UserFailure extends Failure {
   UserFailure({required super.message});
 }
+
+final class GetAllPokemonsFailure extends Failure {
+  GetAllPokemonsFailure({required super.message});
+}
+
+final class FavoritePokemonsFailure extends Failure {
+  FavoritePokemonsFailure({required super.message});
+}
+
+final class GetSavedFavoritePokemonsFailure extends Failure {
+  GetSavedFavoritePokemonsFailure({required super.message});
+}

@@ -1,30 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:study_time/src/features/presenter/pages/initial_page.dart';
+import 'package:study_time/src/core/arguments/details_pokemon_argument/details_pokemon_argument.dart';
+import 'package:study_time/src/core/arguments/pokemon_argument/pokemon_argument.dart';
+import 'package:study_time/src/features/presenter/pages/details_pokemon_page.dart';
+import 'package:study_time/src/features/presenter/pages/login_page.dart';
+import 'package:study_time/src/features/presenter/pages/main_page.dart';
+import 'package:study_time/src/features/presenter/pages/register_page.dart';
+import 'package:study_time/src/features/presenter/pages/pokemons_page.dart';
 
-import '../../features/presenter/pages/teste.dart';
-import 'study_time_named_routes.dart';
+import 'app_named_routes.dart';
 
 sealed class RouteGenerator {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
-    // final args = settings.arguments;
+    final args = settings.arguments;
     switch (settings.name) {
-      /// Splash:
-      // case '/splash_page':
-      //   return MaterialPageRoute(builder: (context) => const SplashPage());
+      case AppNamedRoutes.mainPage:
+        return MaterialPageRoute(builder: (context) => const MainPage());
 
-      /// Initial:
-      case StudyTimeNamedRoutes.initialPage:
-        return MaterialPageRoute(builder: (context) => const InitialPage());
+      case AppNamedRoutes.loginPage:
+        return MaterialPageRoute(builder: (context) => const LoginPage());
 
-      case StudyTimeNamedRoutes.test:
-        return MaterialPageRoute(builder: (context) => const Teste());
+      case AppNamedRoutes.registerPage:
+        return MaterialPageRoute(builder: (context) => const RegisterPage());
 
-      // case PokedexNamedRoutes.detailsPage:
-      //   return MaterialPageRoute(
-      //     builder: (context) => DetailsPokemonPage(
-      //       arguments: args as DetailsPokemonArgument,
-      //     ),
-      //   );
+      case AppNamedRoutes.pokemonsPage:
+        return MaterialPageRoute(
+            builder: (context) => PokemonsPage(
+                  argument: args as PokemonArgument,
+                ));
+
+      case AppNamedRoutes.detailsPokemonPage:
+        return MaterialPageRoute(
+          builder: (context) => DetailsPokemonPage(
+            arguments: args as DetailsPokemonArgument,
+          ),
+        );
     }
     return null;
   }
