@@ -20,10 +20,10 @@ final class GetDetailsPokemonDatasourceImpl
 
       return DetailsPokemonModel.fromJson(response.data);
     } on DioException catch (exception, stackTrace) {
-      throw PokedexExceptions(
+      throw GetDetailsPokemonExceptions(
           message: exception.toString(), stackTrace: stackTrace);
     } catch (exception, stackTrace) {
-      throw PokedexExceptions(
+      throw GetDetailsPokemonExceptions(
           message: 'Erro ao buscar pokemons', stackTrace: stackTrace);
     }
   }

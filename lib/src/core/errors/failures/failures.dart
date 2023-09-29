@@ -22,6 +22,10 @@ final class GetAllPokemonsFailure extends Failure {
   GetAllPokemonsFailure({required super.message});
 }
 
+final class GetDetailsPokemonsFailure extends Failure {
+  GetDetailsPokemonsFailure({required super.message});
+}
+
 final class FavoritePokemonsFailure extends Failure {
   FavoritePokemonsFailure({required super.message});
 }

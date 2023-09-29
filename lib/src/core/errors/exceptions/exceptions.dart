@@ -5,12 +5,7 @@ final class UserException implements Exception {
   UserException({required this.message, required this.stackTrace});
 }
 
-final class PokedexExceptions implements Exception {
-  final String message;
-  final StackTrace stackTrace;
-
-  PokedexExceptions({required this.message, required this.stackTrace});
-}
+//
 
 final class FavoritePokemonsExceptions implements Exception {
   final String message;
@@ -25,4 +20,19 @@ final class GetSavedFavoritePokemonsExceptions implements Exception {
 
   GetSavedFavoritePokemonsExceptions(
       {required this.message, required this.stackTrace});
+}
+
+final class GetDetailsPokemonExceptions implements Exception {
+  final String message;
+  final StackTrace stackTrace;
+
+  GetDetailsPokemonExceptions(
+      {required this.message, required this.stackTrace});
+}
+
+final class GetAllPokemonExceptions implements Exception {
+  final String message;
+  final StackTrace stackTrace;
+
+  GetAllPokemonExceptions({required this.message, required this.stackTrace});
 }

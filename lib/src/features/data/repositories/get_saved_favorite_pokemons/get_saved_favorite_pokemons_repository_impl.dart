@@ -24,7 +24,7 @@ final class GetSavedFavoritePokemonsRepositoryImpl
       return Right(result);
     } on GetSavedFavoritePokemonsExceptions catch (e) {
       return Left(
-        FavoritePokemonsFailure(
+        GetSavedFavoritePokemonsFailure(
           message: e.toString(),
         ),
       );

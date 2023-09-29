@@ -19,9 +19,9 @@ final class GetDetailsPokemonRepositoryImpl
     try {
       final result = await _getDetailsPokemonDatasource(pokemonId: pokemonId);
       return Right(result);
-    } on PokedexExceptions catch (e) {
+    } on GetDetailsPokemonExceptions catch (e) {
       return Left(
-        GetAllPokemonsFailure(
+        GetDetailsPokemonsFailure(
           message: e.toString(),
         ),
       );

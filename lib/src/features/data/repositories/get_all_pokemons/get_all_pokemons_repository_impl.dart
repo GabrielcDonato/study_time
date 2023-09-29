@@ -17,7 +17,7 @@ final class GetAllPokemonsRepositoryImpl implements GetAllPokemonsRepository {
     try {
       final result = await _getAllPokemonsDatasource();
       return Right(result);
-    } on PokedexExceptions catch (e) {
+    } on GetAllPokemonExceptions catch (e) {
       return Left(
         GetAllPokemonsFailure(
           message: e.toString(),
